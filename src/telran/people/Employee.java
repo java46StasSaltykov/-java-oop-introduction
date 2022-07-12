@@ -15,5 +15,5 @@ public class Employee extends Person {
 	public int computePay() {
 		return basicSalary;
 	}
-
+	
 }
