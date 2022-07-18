@@ -4,65 +4,90 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import telran.people.Employee;
-import telran.people.Person;
-import telran.people.SalesPerson;
-import telran.people.WageEmployee;
+import telran.people.*;
 
-class PeopleTests {
+class PersonEmployeeTests {
+
+	private static final long ID = 123;
+	private static final int BIRTH_YEAR = 2000;
+	private static final String EMAIL = "vasya@gmail.com";
+	private static final String ANOTHER_EMAIL = "vasya@tel-ran.com";
+	private static final int BASIC_SALARY = 1000;
+	private static final int SALES = 50;
+	private static final int PERCENT_PAY = 50;
+	private static final int WAGE = 200;
+	private static final int HOURS = 5;
+	private static final int WAGE_EMPLOYEE_SALARY = 2000;
+	private static final int SALES_PERSON_SALARY = 1025;
+	private static final int ANOTHER_BASIC_SALARY = 10000;
+	private static final int ANOTHER_SALES = 500;
+	private static final int ANOTHER_PERCENT_PAY = 10;
+	private static final int ANOTHER_WAGE = 300;
+	private static final int ANOTHER_HOURS = 20;
+	private static final int ANOTHER_WAGE_EMPLOYEE_SALARY = 7000;
+	private static final int ANOTHER_SALES_PERSON_SALARY = 1050;
 
 	@Test
 	void personTest() {
-		long id = 123456789;
-		int birthYear = 1990;
-		String email = "john@gmail.com";
-		Person person1 = new Person(id, birthYear, email);
-		assertEquals(id, person1.getId());
-		assertEquals(birthYear, person1.getBirthYear());
-		assertEquals(email, person1.getEmail());
-		String email1 = "johnny@gmail.com";
-		person1.setEmail(email1);
-		assertEquals(email1, person1.getEmail());
+		Person person = new Person(ID, BIRTH_YEAR, EMAIL);
+		// Person constructor and getters test
+		assertEquals(ID, person.getId());
+		assertEquals(BIRTH_YEAR, person.getBirthYear());
+		assertEquals(EMAIL, person.getEmail());
+		/***************************************/
+		// Person setter test
+		person.setEmail(ANOTHER_EMAIL);
+		assertEquals(ANOTHER_EMAIL, person.getEmail());
 	}
-	
+
 	@Test
 	void employeeTest() {
-		long id = 135698574;
-		int birthYear = 1991;
-		String email = "john@gmail.com";
-		int basicSalary = 5000;
-		Employee employee1 = new Employee(id, birthYear, email, basicSalary);
-		assertEquals(basicSalary, employee1.computePay());
-		String email1 = "johnny@gmail.com";
-		int basicSalary1 = 6000;
-		employee1.setBasicSalary(basicSalary1);
-		employee1.setEmail(email1);
-		assertEquals(basicSalary1, employee1.computePay());
-		assertEquals(email1, employee1.getEmail());
+		Employee empl = new Employee(ID, BIRTH_YEAR, EMAIL, BASIC_SALARY);
+		// Employee constructor test
+		assertEquals(ID, empl.getId());
+		assertEquals(BIRTH_YEAR, empl.getBirthYear());
+		assertEquals(EMAIL, empl.getEmail());
+		/******************************************************/
+		// Employee computePay test
+		assertEquals(BASIC_SALARY, empl.computePay());
+		/***********************************************************/
+		// Employee setter test
+		empl.setBasicSalary(ANOTHER_BASIC_SALARY);
+		assertEquals(ANOTHER_BASIC_SALARY, empl.computePay());
 	}
-	
+
 	@Test
 	void wageEmployeeTest() {
-		long id = 245652574;
-		int birthYear = 1985;
-		String email = "john@gmail.com";
-		int basicSalary = 6000;
-		int wage = 20;
-		int hours = 100;
-		WageEmployee wageEmployee1 = new WageEmployee(id, birthYear, email, basicSalary, wage, hours);
-		assertEquals(8000, wageEmployee1.computePay());
+		WageEmployee wageEmpl = new WageEmployee(ID, BIRTH_YEAR, EMAIL, BASIC_SALARY, WAGE, HOURS);
+		// WageEmployee constructor test
+		assertEquals(ID, wageEmpl.getId());
+		assertEquals(BIRTH_YEAR, wageEmpl.getBirthYear());
+		assertEquals(EMAIL, wageEmpl.getEmail());
+		/**********************************************/
+		// WageEmployee computePay test
+		assertEquals(WAGE_EMPLOYEE_SALARY, wageEmpl.computePay());
+		/***********************************************************/
+		// WageEmployee setters test
+		wageEmpl.setHours(ANOTHER_HOURS);
+		wageEmpl.setWage(ANOTHER_WAGE);
+		assertEquals(ANOTHER_WAGE_EMPLOYEE_SALARY, wageEmpl.computePay());
 	}
-	
+
 	@Test
 	void salesPersonTest() {
-		long id = 945852314;
-		int birthYear = 1994;
-		String email = "john@gmail.com";
-		int basicSalary = 8000;
-		int sales = 5000;
-		int percentPay = 20;
-		SalesPerson salesPerson1 = new SalesPerson(id, birthYear, email, basicSalary, sales, percentPay);
-		assertEquals(9000, salesPerson1.computePay());
+		SalesPerson salesPerson = new SalesPerson(ID, BIRTH_YEAR, EMAIL, BASIC_SALARY, SALES, PERCENT_PAY);
+		// SalesPerson constructor
+		assertEquals(ID, salesPerson.getId());
+		assertEquals(BIRTH_YEAR, salesPerson.getBirthYear());
+		assertEquals(EMAIL, salesPerson.getEmail());
+		/**********************************************/
+		// SalesPerson computePay test
+		assertEquals(SALES_PERSON_SALARY, salesPerson.computePay());
+		/***********************************************************/
+		// SalesPerson setters test
+		salesPerson.setSales(ANOTHER_SALES);
+		salesPerson.setPercentPay(ANOTHER_PERCENT_PAY);
+		assertEquals(ANOTHER_SALES_PERSON_SALARY, salesPerson.computePay());
 	}
-	
+
 }
