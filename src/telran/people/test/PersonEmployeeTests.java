@@ -40,6 +40,7 @@ class PersonEmployeeTests {
 		assertEquals(ANOTHER_EMAIL, person.getEmail());
 	}
 
+	@Test
 	void employeeTest() {
 		Employee empl = new Employee(ID, BIRTH_YEAR, EMAIL, BASIC_SALARY);
 		// Employee constructor test
@@ -72,6 +73,7 @@ class PersonEmployeeTests {
 		assertEquals(ANOTHER_WAGE_EMPLOYEE_SALARY, wageEmpl.computePay());
 	}
 
+	@Test
 	void salesPersonTest() {
 		SalesPerson salesPerson = new SalesPerson(ID, BIRTH_YEAR, EMAIL, BASIC_SALARY, SALES, PERCENT_PAY);
 		// SalesPerson constructor
