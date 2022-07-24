@@ -1,6 +1,8 @@
 package telran.people;
 
-public class Person {
+import java.util.regex.Pattern;
+
+public class Person implements Comparable<Person>{
 	private long id;
 	private int birthYear;
 	private String email;
@@ -16,7 +18,13 @@ public class Person {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		String emailRegex = "^[A-Za-z0-9+.-]+@[a-z]+(\\.[a-z]+)$";
+		Pattern p = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
+		if (email == null || p.matcher(email).matches()) {
+			this.email = email;
+		} else {
+			throw new IllegalArgumentException(String.format("The given email doesn't match the email pattern."));
+		}
 	}
 
 	public long getId() {
@@ -25,6 +33,11 @@ public class Person {
 
 	public int getBirthYear() {
 		return birthYear;
+	}
+
+	@Override
+	public int compareTo(Person o) {
+		return Long.compare(this.id, o.id);
 	}
 
 }

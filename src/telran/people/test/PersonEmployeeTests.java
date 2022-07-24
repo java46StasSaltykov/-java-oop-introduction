@@ -11,7 +11,7 @@ class PersonEmployeeTests {
 	private static final long ID = 123;
 	private static final int BIRTH_YEAR = 2000;
 	private static final String EMAIL = "vasya@gmail.com";
-	private static final String ANOTHER_EMAIL = "vasya@tel-ran.com";
+	private static final String ANOTHER_EMAIL = "vasya@telran.com";
 	private static final int BASIC_SALARY = 1000;
 	private static final int SALES = 50;
 	private static final int PERCENT_PAY = 50;
@@ -89,5 +89,75 @@ class PersonEmployeeTests {
 		salesPerson.setPercentPay(ANOTHER_PERCENT_PAY);
 		assertEquals(ANOTHER_SALES_PERSON_SALARY, salesPerson.computePay());
 	}
+	
+	@Test
+	void wrongBirthYearTest() {
+		boolean flException = false;
+		try {
+			new SalesPerson(123, 2018, "sp@.com", 1000, 100, 50);
+			fail("Should be thrown exception");
+		} catch (IllegalArgumentException e) {
+			flException = true;
+			System.out.println(e.getMessage());
+		}
+		assertTrue(flException);
+		try {
+			new Employee(100, 1913, ANOTHER_EMAIL, BASIC_SALARY);
+		} catch (IllegalArgumentException e) {
+			flException = true;
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	@Test
+	void emailTest() {
+		try {
+			new Employee(120, 1978, "empl@gmail.com", 1000);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+
+		try {
+			new Person(120, 1978, "emplgmail.com");
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		try {
+			new SalesPerson(120, 1978, "emplgmail@com", 1000, 100, 10);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		try {
+			new WageEmployee(120, 1978, "@emplgmailcom", 1000, 10, 10);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@Test
+	void salaryTest() {
+		try {
+			new Employee(120, 1978, "empl@gmail.com", 10);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@Test
+	void percentTest() {
+		try {
+			new SalesPerson(120, 1978, "empl@gmail.com", 1000, 100, 120);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
 }
+
+
+
+
+
