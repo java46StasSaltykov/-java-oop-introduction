@@ -11,5 +11,5 @@ public class EmployeeSalaryComparator implements Comparator<Employee> {
 		
 		return Integer.compare(o1.computePay(), o2.computePay());
 	}
-	
+
 }

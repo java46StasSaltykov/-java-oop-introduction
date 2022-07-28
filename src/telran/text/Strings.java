@@ -14,7 +14,7 @@ public class Strings {
 	 */
 	public static String[] sortStringsAsDates(String[] dates) {
 		String[] res = Arrays.copyOf(dates, dates.length);
-		Arrays.sort(res, new datesComparator());
+		Arrays.sort(res, new StringsDatesComparator());
 		return res;
 	}
 
