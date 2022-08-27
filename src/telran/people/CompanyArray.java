@@ -88,14 +88,18 @@ int currentInd = 0;
 	@Override
 	public Employee[] sortEmployeesByAge() {
 		Employee[] res = Arrays.copyOf(employees, employees.length);
-		Arrays.sort(res, new PersonAgeComparator());
+		Arrays.sort(res, (p1, p2) -> {
+			return Integer.compare(p2.getBirthYear(), p1.getBirthYear());
+		});
 		return res;
 	}
 
 	@Override
 	public Employee[] sortEmployeesBySalary() {
 		Employee[] res = Arrays.copyOf(employees, employees.length);
-		Arrays.sort(res, new EmployeeSalaryComparator());
+		Arrays.sort(res, (o1, o2) -> {
+			return Integer.compare(o1.computePay(), o2.computePay());
+		});
 		return res;
 	}
 

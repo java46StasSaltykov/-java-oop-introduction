@@ -117,7 +117,13 @@ class CompanyTests {
 	@Test
 	void testFindSalesPersons() {
 		Employee[] expected = {empl2};
-		assertArrayEquals(expected, company.findEmployees(new SalesPersonPredicate()));
+		assertArrayEquals(expected, company.findEmployees(s -> {
+			if (s instanceof SalesPerson) {
+				return true;
+			} else {
+				return false;
+			}
+		}));
 	}
 	@Test
 	void testFindEmployeesSalaryRange() {
@@ -131,11 +137,32 @@ class CompanyTests {
 				empl2
 		};
 		assertArrayEquals(expectedGT10000, 
-				company.findEmployees(new SalaryRangePredicate(10000, Integer.MAX_VALUE)));
+				company.findEmployees(t -> {
+					int salary = t.computePay();
+					if (salary >= 10000 && salary <= Integer.MAX_VALUE) {
+						return true;
+					} else {
+						return false;
+					}
+				}));
 		assertArrayEquals(expected20000_30000,
-				company.findEmployees(new SalaryRangePredicate(20000, 30000)));
+				company.findEmployees(t -> {
+					int salary = t.computePay();
+					if (salary >= 20000 && salary <= 30000) {
+						return true;
+					} else {
+						return false;
+					}
+				}));
 		assertArrayEquals(expected1000_1500,
-				company.findEmployees(new SalaryRangePredicate(1000, 1500)));
+				company.findEmployees(t -> {
+					int salary = t.computePay();
+					if (salary >= 1000 && salary <= 1500) {
+						return true;
+					} else {
+						return false;
+					}
+				}));
 	}
 	@Test
 	void companyIterableTest() {
